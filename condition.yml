@@ -1,0 +1,18 @@
+- name: Condition Playbook
+  hosts: ubuntuserver
+  user: ansible
+  sudo: yes
+  connection: ssh
+  gather_facts: yes
+  vars:
+    playbook_type: conditionalexample
+  vars_files:
+    - conf/copyright.yml
+    - conf/webdefaults.yml
+  tasks:
+   - name: Install Apache Appropriate to Distrobution Type (Debian/Ubuntu)
+     command: apt-get -y install apache2
+     when: ansible_os_family == "Debian"
+   - name: Install Apache Appropriate to Distrobution Type (RedHat/CentOS)
+     command: yum -y install httpd
+     when: ansible_os_family == "RedHat"

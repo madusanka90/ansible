@@ -1,0 +1,13 @@
+- name: Example Playbook for Include statement
+  hosts: webserver
+  user: ansible
+  sudo: yes
+  connection: ssh
+  gather_facts: no
+  vars_prompt:
+   - name: pkg_name
+     prompt: pkg name ?
+  tasks:
+   - include: plays/packages.yml
+   - name: Verify telnet package is installed
+     raw: yum list installed | grep telnet > /home/ansible/pkgs.log

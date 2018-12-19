@@ -1,0 +1,7 @@
+- name: Local Action Playbook
+  hosts: 127.0.0.1
+  connection: local
+  gather_facts: no
+  tasks:
+   - name: Install Telnet Client
+     yum: pkg=telnet state=installed

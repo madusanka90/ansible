@@ -1,0 +1,4 @@
+- name: Install the telnet client
+  yum: pkg={{ pkg_name }} state=latest
+- name: Install lynx web browser
+  yum: pkg=lynx state=latest

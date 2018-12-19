@@ -1,0 +1,27 @@
+- name: Testing Variable Substitution
+  hosts: webserver
+  user: ansible
+  sudo: yes
+  connection: ssh
+  gather_facts: no
+  vars:
+   playbook_version: 0.1b
+  vars_files:
+    - conf/copyright.yml
+    - conf/webdefaults.yml
+  vars_prompt:
+    - name: pkg_name
+      prompt: which package name ?
+  tasks:
+   - name: install httpd web server
+     yum: pkg={{ web_server }} state=installed
+     async: 600
+     poll: 3
+     notify: Restart_HTTPD
+   - name: install httpd web server
+     yum: pkg={{ pkg_name }} state=installed
+     default: telnet
+     private: no
+  handlers:
+   - name: Restart_HTTPD
+     action: service name=httpd state=restarted

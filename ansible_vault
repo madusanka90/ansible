@@ -1,0 +1,5 @@
+ansible-vault create secure.yml // create ansible vault file
+ansible-vault edit secure.yml // edit ansible vault file
+ansible-vault rekey secure.yml // reset password of vault file
+ansible-vault decrypt secure.yml // decrypt vault file
+ansible-vault encrypt secure.yml // encrypt a ansible file
